@@ -12,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.Objects.nonNull;
 
 @RestController
 @RequestMapping(value = "/api/flight")
@@ -40,11 +44,16 @@ public class FlightController {
   }
 
   @GetMapping(value = "/{id}")
-  public ResponseEntity<GetFlightResponseDTO> get(@PathParam(value = "id") final UUID id) {
+  public ResponseEntity<GetFlightResponseDTO> get(@PathVariable(value = "id") final UUID id) {
     final Context context = new Context();
     context.setData(id);
-    final Flight flight = consultFlightPort.process(context);
-    return ResponseEntity.ok().body(mapper.from(flight));
+    final GetFlightResponseDTO response = consultFlightPort.process(context).map(mapper::from).orElse(null);
+    if(nonNull(response)) {
+      return ResponseEntity.ok().body(response);
+    }
+    else {
+      return ResponseEntity.notFound().build();
+    }
   }
 
 }

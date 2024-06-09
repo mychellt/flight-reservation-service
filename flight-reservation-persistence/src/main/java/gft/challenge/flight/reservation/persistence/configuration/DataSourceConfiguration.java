@@ -1,4 +1,4 @@
-package gft.challenge.flight.reservation.configuration;
+package gft.challenge.flight.reservation.persistence.configuration;
 
 import lombok.Getter;
 import lombok.Setter;

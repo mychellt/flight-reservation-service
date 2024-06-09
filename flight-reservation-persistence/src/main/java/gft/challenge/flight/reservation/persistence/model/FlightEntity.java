@@ -1,4 +1,4 @@
-package gft.challenge.flight.reservation.model;
+package gft.challenge.flight.reservation.persistence.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package gft.challenge.flight.reservation.repository;
+package gft.challenge.flight.reservation.persistence.repository;
 
-import gft.challenge.flight.reservation.model.FlightEntity;
+import gft.challenge.flight.reservation.persistence.model.FlightEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
