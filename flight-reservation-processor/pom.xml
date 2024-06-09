@@ -11,4 +11,10 @@
 
     <artifactId>flight-reservation-processor</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>gft.challenge</groupId>
+            <artifactId>flight-reservation-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

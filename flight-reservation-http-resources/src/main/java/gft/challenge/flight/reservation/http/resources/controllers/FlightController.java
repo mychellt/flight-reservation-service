@@ -23,7 +23,9 @@ public class FlightController {
   private final HttpResourcesModelMappers mapper;
 
   @Autowired
-  public FlightController(final CreateFlightPort createFlightPort, final ConsultFlightPort consultFlightPort, HttpResourcesModelMappers mapper) {
+  public FlightController(final CreateFlightPort createFlightPort,
+                          final ConsultFlightPort consultFlightPort,
+                          final HttpResourcesModelMappers mapper) {
     this.createFlightPort = createFlightPort;
     this.consultFlightPort = consultFlightPort;
     this.mapper = mapper;
