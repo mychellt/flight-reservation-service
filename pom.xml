@@ -16,23 +16,18 @@
 
 	<name>flight-reservation</name>
 
-	<description>Travel Booking Service</description>
-	<modules>
-		<module>flight-reservation-application</module>
-		<module>flight-reservation-core</module>
-        <module>flight-reservation-domain</module>
-		<module>flight-reservation-persistence</module>
-		<module>flight-reservation-messaging-rabbitmq</module>
-		<module>flight-reservation-http-resources</module>
-	</modules>
+	<description>Flight Reservation Service</description>
+
 	<properties>
 		<java.version>17</java.version>
+		<commons-lang3>3.14.0</commons-lang3>
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
 		<dependency>
@@ -41,11 +36,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -53,21 +50,113 @@
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>gft.challenge</groupId>
+				<artifactId>flight-reservation-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>gft.challenge</groupId>
+				<artifactId>flight-reservation-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>gft.challenge</groupId>
+				<artifactId>flight-reservation-http-resources</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>gft.challenge</groupId>
+				<artifactId>flight-reservation-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>gft.challenge</groupId>
+				<artifactId>flight-reservation-messaging-rabbitmq</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>gft.challenge</groupId>
+				<artifactId>flight-reservation-processor</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<inherited>true</inherited>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<inherited>true</inherited>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<excludes>
-						<exclude>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<debug>false</debug>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<annotationProcessorPaths>
+
+						<annotationProcessorPath>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-configuration-processor</artifactId>
+						</annotationProcessorPath>
+
+						<annotationProcessorPath>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+							<version>${lombok.version}</version>
+						</annotationProcessorPath>
+
+						<annotationProcessorPath>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</annotationProcessorPath>
+
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
+
+	<modules>
+		<module>flight-reservation-application</module>
+		<module>flight-reservation-core</module>
+		<module>flight-reservation-domain</module>
+		<module>flight-reservation-persistence</module>
+		<module>flight-reservation-messaging-rabbitmq</module>
+		<module>flight-reservation-http-resources</module>
+		<module>flight-reservation-processor</module>
+	</modules>
 
 </project>

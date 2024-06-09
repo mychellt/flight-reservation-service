@@ -9,13 +9,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>flight-reservation-core</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>gft.challenge</groupId>
-            <artifactId>flight-reservation-domain</artifactId>
-        </dependency>
-    </dependencies>
+    <artifactId>flight-reservation-processor</artifactId>
 
 </project>
