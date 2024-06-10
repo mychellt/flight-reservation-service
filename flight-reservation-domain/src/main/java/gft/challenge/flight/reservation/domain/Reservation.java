@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,8 @@ public class Reservation {
   private Passenger passenger;
   private Status status;
   private LocalDateTime date;
-  private Integer numberOfSeat;
+  private String seats;
+  private UUID travelReservationId;
 
   public boolean isConfirmed() {
     return this.status.equals(Status.CONFIRMED);
